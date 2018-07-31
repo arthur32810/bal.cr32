@@ -9,7 +9,7 @@ class QuestionnaireController extends Controller
 {
   public function indexAction()
   {
-    return new Response("accueil");
+    return $this->render('CR32QuestionnaireBundle::index.html.twig');
   }
 
   public function subscriptionAction()
