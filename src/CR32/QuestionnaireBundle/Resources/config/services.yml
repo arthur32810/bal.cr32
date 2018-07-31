@@ -1,0 +1,4 @@
+services:
+#    cr32_questionnaire.example:
+#        class: CR32\QuestionnaireBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
