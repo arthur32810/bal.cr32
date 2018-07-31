@@ -14,11 +14,11 @@ class QuestionnaireController extends Controller
 
   public function subscriptionAction()
   {
-  	return new Response(" abonnement ");
+  	return $this->render('CR32QuestionnaireBundle::subscription.html.twig');
   }
 
   public function thanksAction()
   {
-  	return new Response(" merci !");
+  	return $this->render('CR32QuestionnaireBundle::thanks.html.twig');
   }
 }
