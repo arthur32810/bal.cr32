@@ -1,3 +1,11 @@
-cr32_questionnaire_homepage:
+cr32_questionnaire_home:
     path:     /
     defaults: { _controller: CR32QuestionnaireBundle:Default:index }
+
+cr32_questionnaire_subscription:
+    path:     /abonnement
+    defaults: { _controller: CR32QuestionnaireBundle:Default:subscription }
+
+cr32_questionnaire_thanks:
+    path:     /merci
+    defaults: { _controller: CR32QuestionnaireBundle:Default:thanks }
