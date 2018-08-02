@@ -6,5 +6,40 @@
 	<h1 class="text-center"> Danses à la demande </h1>
 	<p class="text-center"> Veuillez donner le nom de deux danses pour chaque niveau : </p>	
 
-	<h3> Formulaire ici ! </h3>
+	<div>
+		{{ form_start(form) }}
+
+		{# Erreur du formulaire #}
+		{{ form_errors(form) }}
+
+		<div id="debutant">
+			<p> Débutant </p>
+			<p> {{form_widget(form.titre, {'attr': {'placeholder': '1er choix'}})}} </p>
+			<p> <input type="text" class="form-control" id="debutant2" placeholder="2eme choix"></p>
+		</div>
+
+		<div id="novice">
+			<p> Novice </p>
+			<p> <input type="text" class="form-control" id="novice1" placeholder="1er choix"></p>
+			<p> <input type="text" class="form-control" id="novice2" placeholder="2eme choix"></p>
+		</div>
+
+		<div id="intermediaire">
+			<p> Intermediaire </p>
+			<p> <input type="text" class="form-control" id="intermediaire1" placeholder="1er choix"></p>
+			<p> <input type="text" class="form-control" id="intermediaire2" placeholder="2eme choix"></p>
+		</div>
+
+		<div id="avance">
+			<p> Novice </p>
+			<p> <input type="text" class="form-control" id="avance1" placeholder="1er choix"></p>
+			<p> <input type="text" class="form-control" id="avance2" placeholder="2eme choix"></p>
+		</div>
+
+		{{form_row(form.envoyer, {'attr': {'class': 'float-right'}})}} <br>
+
+		{{ form_rest(form)}}
+
+	</div> <br>
+
 {% endblock %}
