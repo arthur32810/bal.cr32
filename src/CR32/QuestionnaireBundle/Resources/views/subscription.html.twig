@@ -5,7 +5,28 @@
 {% block body %}
 	<h1 class="text-center"> Danses à la demande </h1>
 	<p class="text-left"> Merci pour votre vote ! <br>
-	Pour être sur de recevoir la playlist, rensigner votre email ci-dessous: </p>	
+	Pour être sur de recevoir la playlist, renseigner votre email ci-dessous: </p>	
 
-	<h3> Formulaire ici ! </h3>
+	<div>
+		{{ form_start(form)}}
+
+		{# Erreur du formulaire #}
+		{{ form_errors(form) }}
+
+		{{ form_row(form.name)}}
+		{{ form_row(form.surname)}}
+		{{ form_row(form.email)}}
+
+		<div class="row">
+			<div class="col">
+				<a class="btn btn-danger" href="{{path('cr32_questionnaire_thanks')}}" role="button">Non merci</a>
+			</div>
+			<div class="col">
+				{{ form_row(form.envoyer)}}
+			</div>
+
+		</div>
+
+	</div>
+	<br> <br>
 {% endblock %}
