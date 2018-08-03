@@ -5,6 +5,7 @@ namespace CR32\QuestionnaireBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,7 +24,7 @@ class ContactType extends AbstractType
         ->add('surname',    TextType::class, array(
                                         'label' => 'Prénom',
                                         'attr' => array('placeholder' => 'Votre Prénom')))
-        ->add('email',      TextType::class, array(
+        ->add('email',      EmailType::class, array(
                                         'label' => 'Email',
                                         'attr' => array('placeholder' => 'Votre Email')))
         ->add('subscription', CheckboxType::class, array(
@@ -46,7 +47,7 @@ class ContactType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'cr32_questionnairebundle_contact';
+        return 'cr32_contact';
     }
 
 

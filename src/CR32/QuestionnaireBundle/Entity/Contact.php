@@ -3,6 +3,7 @@
 namespace CR32\QuestionnaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Contact
@@ -25,13 +26,15 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\Length(min=2, minMessage="votre nom doit contenir au moins 2 caractéres")
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="surname", type="string", length=255)
+     * @ORM\Column(name="surname", type="string", length=255)*
+     * @Assert\Length(min=2, minMessage="votre prénom doit contenir au moins 2 caractéres")
      */
     private $surname;
 
@@ -39,6 +42,7 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\Email(checkMX=true)
      */
     private $email;
 

@@ -4,7 +4,16 @@
 
 {% block body %}
 	<h1 class="text-center"> Danses à la demande </h1>
+
+	{% for message in app.session.flashbag.get('noUnique') %}
+	    <p class="alert alert-danger">{{ message }}</p>
+	{% endfor %}	
+
+	{% for message in app.session.flashbag.get('add') %}
+	    <p class="alert alert-success">{{ message }}</p>
+	{% endfor %}
+
 	<p class="text-left"> Vous allez recevoir votre bon par mail ! <br>
-	Nous vous attendons à notre bal du 13 Octobre ! </p>	
+	Nous vous attendons à notre bal du 13 Octobre ! </p>
 
 {% endblock %}

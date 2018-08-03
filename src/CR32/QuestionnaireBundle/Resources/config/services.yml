@@ -1,6 +1,11 @@
 services:
   cr32_questionnaire.dansesAction:
         class: CR32\QuestionnaireBundle\Services\CR32DansesAction
+
+  cr32_questionnaire.contactAction:
+        class: CR32\QuestionnaireBundle\Services\CR32ContactAction
+        arguments:
+          - "@doctrine.orm.entity_manager"
 #    cr32_questionnaire.example:
 #        class: CR32\QuestionnaireBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]

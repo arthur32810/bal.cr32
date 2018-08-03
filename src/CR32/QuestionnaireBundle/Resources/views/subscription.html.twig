@@ -16,6 +16,7 @@
 		{{ form_row(form.name)}}
 		{{ form_row(form.surname)}}
 		{{ form_row(form.email)}}
+		{{ form_row(form.subscription)}}
 
 		<div class="row">
 			<div class="col">
@@ -24,8 +25,9 @@
 			<div class="col">
 				{{ form_row(form.envoyer)}}
 			</div>
-
 		</div>
+
+		{{ form_rest(form)}}
 
 	</div>
 	<br> <br>
