@@ -78,7 +78,7 @@ class QuestionnaireController extends Controller
           $em->persist($contact);
           $em->flush();
 
-          $session->getFlashBag()->add('add', 'Votre participation a bien été enregistré');
+          $session->getFlashBag()->add('add', 'Votre participation a bien été enregistrée');
           return $this->redirectToRoute('cr32_questionnaire_thanks');
       }
       else {
