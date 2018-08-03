@@ -1,0 +1,4 @@
+services:
+#    cr32_user.example:
+#        class: CR32\UserBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
