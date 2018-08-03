@@ -12,12 +12,30 @@ class QuestionnaireController extends Controller
 {
   public function indexAction(Request $request)
   {
-    $danses =  new Danses;
-    $form = $this->createForm(DansesType::class, $danses);
+    // Création du formulaire
+    $form = $this->createForm(DansesType::class);
 
-    if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+    // Test si l'a été envoyé
+    if ($request->isMethod('POST') && $form->handleRequest($request))
     {
-      return new Response('complete');
+        $danses = new Danses;
+        // Récupération des champs dans data.
+        $datas = $form->getData();
+
+        // Accés au repository
+        $em = $this->getDoctrine()->getManager();
+        $advertRepository = $em->getRepository('CR32QuestionnaireBundle:Danses');
+
+        $session = $request->getSession();
+
+        $formdanses = $this->container->get('cr32_questionnaire.dansesAction');
+
+        $formdanses = $formdanses->dansesAction($datas, $session, $em, $danses);
+
+        if($formdanses==false)
+        {
+          return $this->redirectToRoute('cr32_questionnaire_subscription');
+        }        
     }
 
     return $this->render('CR32QuestionnaireBundle::index.html.twig', array('form' => $form->createView()));

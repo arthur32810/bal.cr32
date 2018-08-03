@@ -16,25 +16,14 @@ class DansesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('titre', TextType::class, array('required'=> false))
+        ->add('debutant1', TextType::class, array('required'=> false))
+        ->add('debutant2', TextType::class, array('required'=> false))
+        ->add('novice1', TextType::class, array('required'=> false))
+        ->add('novice2', TextType::class, array('required'=> false))
+        ->add('intermediaire1', TextType::class, array('required'=> false))
+        ->add('intermediaire2', TextType::class, array('required'=> false))
+        ->add('avance1', TextType::class, array('required'=> false))
+        ->add('avance2', TextType::class, array('required'=> false))
         ->add('envoyer', SubmitType::class);
-    }/**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'CR32\QuestionnaireBundle\Entity\Danses'
-        ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'cr32_questionnairebundle_danses';
-    }
-
-
 }

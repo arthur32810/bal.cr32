@@ -7,6 +7,9 @@
 	<p class="text-center"> Veuillez donner le nom de deux danses pour chaque niveau : </p>	
 
 	<div>
+		{% for message in app.session.flashbag.get('noDanse') %}
+	        <p class="alert alert-danger">{{ message }}</p>
+	      {% endfor %}
 		{{ form_start(form) }}
 
 		{# Erreur du formulaire #}
@@ -14,26 +17,26 @@
 
 		<div id="debutant">
 			<p> Débutant </p>
-			<p> {{form_widget(form.titre, {'attr': {'placeholder': '1er choix'}})}} </p>
-			<p> <input type="text" class="form-control" id="debutant2" placeholder="2eme choix"></p>
+			<p> {{form_widget(form.debutant1, {'attr': {'placeholder': '1er choix'}})}} </p>
+			<p> {{form_widget(form.debutant2, {'attr': {'placeholder': '2eme choix'}})}} </p>
 		</div>
 
 		<div id="novice">
 			<p> Novice </p>
-			<p> <input type="text" class="form-control" id="novice1" placeholder="1er choix"></p>
-			<p> <input type="text" class="form-control" id="novice2" placeholder="2eme choix"></p>
+			<p> {{form_widget(form.novice1, {'attr': {'placeholder': '1er choix'}})}} </p>
+			<p> {{form_widget(form.novice2, {'attr': {'placeholder': '2eme choix'}})}} </p>
 		</div>
 
 		<div id="intermediaire">
 			<p> Intermediaire </p>
-			<p> <input type="text" class="form-control" id="intermediaire1" placeholder="1er choix"></p>
-			<p> <input type="text" class="form-control" id="intermediaire2" placeholder="2eme choix"></p>
+			<p> {{form_widget(form.intermediaire1, {'attr': {'placeholder': '1er choix'}})}} </p>
+			<p> {{form_widget(form.intermediaire2, {'attr': {'placeholder': '2eme choix'}})}} </p>
 		</div>
 
 		<div id="avance">
 			<p> Novice </p>
-			<p> <input type="text" class="form-control" id="avance1" placeholder="1er choix"></p>
-			<p> <input type="text" class="form-control" id="avance2" placeholder="2eme choix"></p>
+			<p> {{form_widget(form.avance1, {'attr': {'placeholder': '1er choix'}})}} </p>
+			<p> {{form_widget(form.avance2, {'attr': {'placeholder': '2eme choix'}})}} </p>
 		</div>
 
 		{{form_row(form.envoyer, {'attr': {'class': 'float-right'}})}} <br>
