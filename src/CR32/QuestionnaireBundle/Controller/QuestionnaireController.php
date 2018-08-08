@@ -42,7 +42,7 @@ class QuestionnaireController extends Controller
         }        
     }
 
-    return $this->render('CR32QuestionnaireBundle::index.html.twig', array('form' => $form->createView()));
+    return $this->render('CR32QuestionnaireBundle:Questionnaire:index.html.twig', array('form' => $form->createView()));
   }
 
   public function subscriptionAction(Request $request)
@@ -91,11 +91,11 @@ class QuestionnaireController extends Controller
     }
 
 
-  	return $this->render('CR32QuestionnaireBundle::subscription.html.twig', array('form' => $form->createView()));
+  	return $this->render('CR32QuestionnaireBundle:Questionnaire:subscription.html.twig', array('form' => $form->createView()));
   }
 
   public function thanksAction()
   {
-  	return $this->render('CR32QuestionnaireBundle::thanks.html.twig');
+  	return $this->render('CR32QuestionnaireBundle:Questionnaire:thanks.html.twig');
   }
 }

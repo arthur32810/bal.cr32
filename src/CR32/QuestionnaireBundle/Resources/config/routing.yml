@@ -15,3 +15,30 @@ cr32_questionnaire_thanks:
 cr32_administration_admin:
     path:   /admin
     defaults: { _controller: CR32QuestionnaireBundle:Administration:admin }
+
+cr32_administration_danses:
+    path:   /admin/danses
+    defaults: { _controller: CR32QuestionnaireBundle:Administration:danses }
+
+cr32_administration_contacts:
+    path:   /admin/contacts
+    defaults: { _controller: CR32QuestionnaireBundle:Administration:contacts }
+
+cr32_administration_profil:
+    path:   /admin/profil
+    defaults: { _controller: CR32QuestionnaireBundle:Administration:profil }
+
+# supression d'une danse
+cr32_administration_danse_delete:
+    path:   /admin/danse/delete/{id}
+    defaults: { _controller: CR32QuestionnaireBundle:Administration:deleteDanse }
+
+# modification d'une danse
+cr32_administration_danses_edit:
+    path:   /admin/danse/edit/{id}
+    defaults: { _controller: CR32QuestionnaireBundle:Administration:editDanse }
+
+# suppression d'un contact
+cr32_administration_contact_delete:
+    path:   /admin/contact/delete/{id}
+    defaults: { _controller: CR32QuestionnaireBundle:Administration:deleteContact }
