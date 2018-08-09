@@ -20,4 +20,17 @@ class DansesRepository extends \Doctrine\ORM\EntityRepository
 			->getResult();
 	}
 
+	public function selectNiveau($niveau)
+	{
+		$qb = $this->createQueryBuilder('a');
+
+		$qb ->where('a.niveau = :niveau')
+				->setParameter('niveau', $niveau)
+			->orderBy('a.titre', 'ASC');
+
+		return $qb
+			-> getQuery()
+			->getResult();
+	}
+
 }
