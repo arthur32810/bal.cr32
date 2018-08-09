@@ -8,9 +8,9 @@
 	<nav class="nav justify-content-center">
 		<a class="nav-link" href="{{ path('cr32_administration_danses')}}"> Tous </a>
 		<a class="nav-link" href="{{ path('cr32_administration_danses', {'niveau': 1})}}"> Débutant </a>
-		<a class="nav-link" href="#"> Novice </a>
-		<a class="nav-link" href="#"> Intermédiaire </a>
-		<a class="nav-link" href="#"> Avancé </a>
+		<a class="nav-link" href="{{ path('cr32_administration_danses', {'niveau': 2})}}"> Novice </a>
+		<a class="nav-link" href="{{ path('cr32_administration_danses', {'niveau': 3})}}"> Intermédiaire </a>
+		<a class="nav-link" href="{{ path('cr32_administration_danses', {'niveau': 4})}}"> Avancé </a>
 	</nav>
 
 	{% for message in app.session.flashbag.get('success') %}

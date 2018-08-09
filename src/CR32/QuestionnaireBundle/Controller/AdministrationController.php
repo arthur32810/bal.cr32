@@ -21,7 +21,6 @@ class AdministrationController extends Controller
 
 	public function dansesAction($niveau)
 	{
-		var_dump($niveau);
 		//récupération du répository
 		$repository = $this
 		  ->getDoctrine()
