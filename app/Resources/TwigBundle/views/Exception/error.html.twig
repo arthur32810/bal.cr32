@@ -1,0 +1,9 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %} Erreur - {{parent()}} {% endblock %}
+
+{% block  body %}
+
+    <h1>Oops! Une erreur c'est produite</h1>
+   <p> Nous vous conseillons de retourner sur la <a href="{{ path('cr32_questionnaire_home')}}"> page d'accueil</a> </p>
+{% endblock %}
