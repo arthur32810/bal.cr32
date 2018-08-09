@@ -70,35 +70,49 @@ class QuestionnaireController extends Controller
       {
         // Récupération du service
         $contactAction = $this->container->get('cr32_questionnaire.contactAction');
+        //Vérification si email unique
+        $uniqueEmail = $contactAction->uniqueEmail($contact);
 
-        //Formatage du texte
-        $formatageName = $contactAction->formatage($contact->getName());
-        $contact->setName($formatageName);
+        if($uniqueEmail === true)
+        {
+          //Formatage du texte
+          $formatageName = $contactAction->formatage($contact->getName());
+          $contact->setName($formatageName);
 
-        $formatageSurname = $contactAction->formatage($contact->getSurname());
-        $contact->setSurname($formatageSurname);
+          $formatageSurname = $contactAction->formatage($contact->getSurname());
+          $contact->setSurname($formatageSurname);
 
-         // Accés au repository
-          $em = $this->getDoctrine()->getManager();
-          $advertRepository = $em->getRepository('CR32QuestionnaireBundle:Danses');
+           // Accés au repository
+            $em = $this->getDoctrine()->getManager();
+            $advertRepository = $em->getRepository('CR32QuestionnaireBundle:Danses');
 
-        //Vérification si contact unique
-        $uniqueContact = $contactAction->uniqueContact($contact);
+          //Vérification si contact unique
+          $uniqueContact = $contactAction->uniqueContact($contact);
 
-        $session = $request->getSession();
 
-        if($uniqueContact==true){
-            $em->persist($contact);
-            $em->flush();
 
-            $session->getFlashBag()->add('add', 'Votre participation a bien été enregistrée');
-            return $this->redirectToRoute('cr32_questionnaire_thanks');
+          $session = $request->getSession();
+
+          if($uniqueContact==true){
+              $em->persist($contact);
+              $em->flush();
+
+              $session->getFlashBag()->add('add', 'Votre participation a bien été enregistrée');
+              return $this->redirectToRoute('cr32_questionnaire_thanks');
+          }
+          else {
+              $session->getFlashBag()->add('noUnique', 'Vous avez déjà participer ! Votre nom et prénom ont déjà été enregistrés');
+
+              return $this->redirectToRoute('cr32_questionnaire_thanks');
+          }
         }
-        else {
-            $session->getFlashBag()->add('noUnique', 'Vous avez déjà participer !');
+        else
+        {
+          $session->getFlashBag()->add('noUnique', 'L\'adresse email a déjà été soumise. Vous ne pouvez pas participer deux fois !');
 
-            return $this->redirectToRoute('cr32_questionnaire_thanks');
+          return $this->redirectToRoute('cr32_questionnaire_thanks');
         }
+
       }
       return $this->render('CR32QuestionnaireBundle:Questionnaire:subscription.html.twig', array('form' => $form->createView()));
     }

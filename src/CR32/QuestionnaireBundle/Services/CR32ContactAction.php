@@ -43,4 +43,17 @@ Class CR32ContactAction
 		}
 		else {return true;}
 	}
+
+	public function uniqueEmail($contact)
+	{
+		$repository = $this->em->getRepository('CR32QuestionnaireBundle:Contact');
+
+		$unique = $repository->findBy(array('email' => $contact->getEmail()));
+
+		if(count($unique) >= 1)
+		{
+			return false;
+		}
+		else{ return true; }
+	}
 }

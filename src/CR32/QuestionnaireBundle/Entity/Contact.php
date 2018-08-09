@@ -41,7 +41,7 @@ class Contact
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, unique=true)
      * @Assert\Email(checkMX=true)
      */
     private $email;
