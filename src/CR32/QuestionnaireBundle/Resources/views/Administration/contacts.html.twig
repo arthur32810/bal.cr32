@@ -5,6 +5,10 @@
 {% block body %}
 	<h1> Participants au tirage au sort </h1>
 
+	{% for message in app.session.flashbag.get('success') %}
+        <p class="alert alert-success">{{ message }}</p>
+	{% endfor %}
+
 	<table class="table">
 		<thead class="thead-light">
 			<tr>
