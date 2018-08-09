@@ -19,16 +19,24 @@ class AdministrationController extends Controller
 		return $this->render('CR32QuestionnaireBundle:Administration:index.html.twig');
 	}
 
-	public function dansesAction()
+	public function dansesAction($niveau)
 	{
+		var_dump($niveau);
 		//récupération du répository
 		$repository = $this
 		  ->getDoctrine()
 		  ->getManager()
 		  ->getRepository('CR32QuestionnaireBundle:Danses');
 
-		  //récupération de toutes les données de la table
-		  $listDanses = $repository->myFindAll();
+		if($niveau >= 1 && $niveau <=4)
+		{
+			$listDanses = $repository->selectNiveau($niveau);
+		}
+		else 
+		{
+			//récupération de toutes les données de la table
+		  	$listDanses = $repository->myFindAll();
+		}
 
 		return $this->render('CR32QuestionnaireBundle:Administration:danses.html.twig', array('listDanses' => $listDanses));
 	}
