@@ -17,8 +17,10 @@ cr32_administration_admin:
     defaults: { _controller: CR32QuestionnaireBundle:Administration:admin }
 
 cr32_administration_danses:
-    path:   /admin/danses
-    defaults: { _controller: CR32QuestionnaireBundle:Administration:danses }
+    path:   /admin/danses/{niveau}
+    defaults: 
+        _controller: CR32QuestionnaireBundle:Administration:danses 
+        niveau: all
 
 cr32_administration_contacts:
     path:   /admin/contacts
