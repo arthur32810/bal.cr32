@@ -31,7 +31,8 @@
 				{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 				    Connecté en tant que {{ app.user.username }}
 				    -
-				    <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+				    <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a> <br>
+				    <a href="{{ path('cr32_administration_admin') }}"> Administration </a>
 				{% else %}
 				    <a href="{{ path('fos_user_security_login') }}">Connexion</a>
 				{% endif %}

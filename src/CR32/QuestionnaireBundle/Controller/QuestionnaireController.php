@@ -22,7 +22,7 @@ class QuestionnaireController extends Controller
     // Test si l'a été envoyé
     if ($request->isMethod('POST') && $form->handleRequest($request))
     {
-        $danses = new Danses;
+        
         // Récupération des champs dans data.
         $datas = $form->getData();
 
@@ -34,7 +34,7 @@ class QuestionnaireController extends Controller
 
         $formdanses = $this->container->get('cr32_questionnaire.dansesAction');
 
-        $formdanses = $formdanses->dansesAction($datas, $session, $em, $danses);
+        $formdanses = $formdanses->dansesAction($datas, $session, $em);
 
         if($formdanses==false)
         {

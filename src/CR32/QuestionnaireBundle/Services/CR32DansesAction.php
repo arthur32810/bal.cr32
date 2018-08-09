@@ -2,9 +2,11 @@
 
 namespace CR32\QuestionnaireBundle\Services;
 
+use CR32\QuestionnaireBundle\Entity\Danses;
+
 Class CR32DansesAction
 {
-	public function dansesAction($datas, $session, $em, $danses){
+	public function dansesAction($datas, $session, $em){
 
 		$null=true;
 
@@ -26,10 +28,14 @@ Class CR32DansesAction
         }
 
         else {
+        	var_dump($datas);
         	foreach($datas as $data)
 	        {
 	          if($data != null)
 	          {
+
+	          	$danses = new Danses();
+
 	          	// remplace les à par a
 	          	$data = str_replace("à", "a", $data);
 	          	// mise en minuscule
@@ -37,13 +43,14 @@ Class CR32DansesAction
 	          	//suppression des caractéres spéciaux
 	          	$data = preg_replace("#[^a-zA-Z0-9éè ]#", "", $data);
 
+
+
 	          	// récupération de la clé""
-	          	$key = key($datas);
+	          	$key = array_search($data, $datas);
 	          	$key = preg_replace("#[^a-zA-Z]#", "", $key);
 
 	          	//On met le nom de la danses dans l'entité
 	          	$danses->setTitre($data);
-
 
 	          	switch($key)
 	          	{

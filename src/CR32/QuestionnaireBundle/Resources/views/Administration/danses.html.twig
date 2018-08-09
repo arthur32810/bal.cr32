@@ -5,9 +5,22 @@
 {% block body %}
 	<h1> Résultat des votes </h1>
 
+	<nav class="nav justify-content-center">
+		<a class="nav-link" href="#"> Tous </a>
+		<a class="nav-link" href="#"> Débutant </a>
+		<a class="nav-link" href="#"> Novice </a>
+		<a class="nav-link" href="#"> Intermédiaire </a>
+		<a class="nav-link" href="#"> Avancé </a>
+	</nav>
+
+	{% for message in app.session.flashbag.get('success') %}
+	        <p class="alert alert-success">{{ message }}</p>
+	      {% endfor %}
+
 	<table class="table">
 		<thead class="thead-light">
 			<tr>
+				<th scope="col"> # </th>
 				<th scope="col"> Titre </th>
 				<th scope="col"> Niveau </th>
 				<th scope="col"> Modifier </th>
@@ -17,6 +30,7 @@
 		
 		{% for danse in listDanses %}
 			<tr> 
+				<td> {{ loop.index }}</td>
 				<td> {{ danse.titre}} </td>
 				<td> {{ danse.niveau}}</td>
 				<td> <a href="{{ path('cr32_administration_danse_edit', {'id': danse.id}) }}"> <i class="far fa-edit" style="color: blue;"></i> </a></td>

@@ -8,26 +8,48 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+use CR32\QuestionnaireBundle\Entity\Danses;
+use CR32\QuestionnaireBundle\Form\DansesEditType;
+
 class AdministrationController extends Controller
 {
 	public function adminAction()
 	{
+		//vue d'administration
 		return $this->render('CR32QuestionnaireBundle:Administration:index.html.twig');
 	}
 
 	public function dansesAction()
 	{
+		//récupération du répository
 		$repository = $this
 		  ->getDoctrine()
 		  ->getManager()
 		  ->getRepository('CR32QuestionnaireBundle:Danses');
 
-		  $listDanses = $repository->findAll();
+		  //récupération de toutes les données de la table
+		  $listDanses = $repository->myFindAll();
 
 		return $this->render('CR32QuestionnaireBundle:Administration:danses.html.twig', array('listDanses' => $listDanses));
 	}
 
-	public function deleteDanseAction($id)
+	public function editDanseAction(Danses $danse, Request $request)
+	{
+		$form = $this->get('form.factory')->create(DansesEditType::class, $danse);
+
+		if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) 
+		{
+			$em = $this->getDoctrine()->getManager();
+      		$em->flush();
+
+      		$request->getSession()->getFlashBag()->add('success', 'Danse bien modifiée.');
+      		return $this->redirectToRoute('cr32_administration_danses');
+		}
+
+		return $this->render('CR32QuestionnaireBundle:Administration:edit.html.twig', array('form'=>$form->createView()));
+	}
+
+	public function deleteDanseAction($id, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
 
@@ -41,6 +63,7 @@ class AdministrationController extends Controller
 		$em->remove($danse);
 		$em->flush();
 
+		$request->getSession()->getFlashBag()->add('success', 'Danse bien supprimée.');
 		return $this->redirectToRoute('cr32_administration_danses');
 	}
 
@@ -53,7 +76,7 @@ class AdministrationController extends Controller
 		return $this->render('CR32QuestionnaireBundle:Administration:contacts.html.twig', array('listContacts'=> $listContacts));
 	}
 
-	public function deleteContactAction($id)
+	public function deleteContactAction($id, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
 
@@ -66,6 +89,8 @@ class AdministrationController extends Controller
 
 		$em->remove($contact);
 		$em->flush();
+
+		$request->getSession()->getFlashBag()->add('success', 'Contact bien suprimé.');
 
 		return $this->redirectToRoute('cr32_administration_contacts');
 	}

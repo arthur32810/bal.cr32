@@ -10,4 +10,14 @@ namespace CR32\QuestionnaireBundle\Repository;
  */
 class DansesRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function myFindAll(){
+		$qb = $this->createQueryBuilder('a');
+
+		$qb->orderBy('a.titre', 'ASC');
+
+		return $qb
+			->getQuery()
+			->getResult();
+	}
+
 }
