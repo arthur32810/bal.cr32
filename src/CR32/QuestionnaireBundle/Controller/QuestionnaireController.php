@@ -30,16 +30,24 @@ class QuestionnaireController extends Controller
         $em = $this->getDoctrine()->getManager();
         $advertRepository = $em->getRepository('CR32QuestionnaireBundle:Danses');
 
+        //Déclaration de la session
         $session = $request->getSession();
 
+
+        //récupération du service
         $formdanses = $this->container->get('cr32_questionnaire.dansesAction');
+        $zerodanses = $formdanses->dansesAction($datas, $session, $em);
 
-        $formdanses = $formdanses->dansesAction($datas, $session, $em);
-
-        if($formdanses==false)
+        //test si au moins une danse à été soumise
+        if($zerodanses==false)
         {
+          //une danse à au moins été votée
+          $session->set('danses', true);
           return $this->redirectToRoute('cr32_questionnaire_subscription');
-        }        
+        }   
+
+        //zéro danse votée
+        $session->set('danses', false);     
     }
 
     return $this->render('CR32QuestionnaireBundle:Questionnaire:index.html.twig', array('form' => $form->createView()));
@@ -47,55 +55,66 @@ class QuestionnaireController extends Controller
 
   public function subscriptionAction(Request $request)
   {
-    //Déclaration de l'entité
-    $contact = new Contact;
+    $session = $request->getSession();
+    $sessionDanse = $session->get('danses');
 
-    //Création du formulaire
-    $form = $this->createForm(ContactType::class, $contact);
-
-    if($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+    if($sessionDanse === true)
     {
-      // Récupération du service
-      $contactAction = $this->container->get('cr32_questionnaire.contactAction');
+      //Déclaration de l'entité
+      $contact = new Contact;
 
-      //Formatage du texte
-      $formatageName = $contactAction->formatage($contact->getName());
-      $contact->setName($formatageName);
+      //Création du formulaire
+      $form = $this->createForm(ContactType::class, $contact);
 
-      $formatageSurname = $contactAction->formatage($contact->getSurname());
-      $contact->setSurname($formatageSurname);
+      if($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+      {
+        // Récupération du service
+        $contactAction = $this->container->get('cr32_questionnaire.contactAction');
 
-       // Accés au repository
-        $em = $this->getDoctrine()->getManager();
-        $advertRepository = $em->getRepository('CR32QuestionnaireBundle:Danses');
+        //Formatage du texte
+        $formatageName = $contactAction->formatage($contact->getName());
+        $contact->setName($formatageName);
 
-      //Vérification si contact unique
-      $uniqueContact = $contactAction->uniqueContact($contact);
+        $formatageSurname = $contactAction->formatage($contact->getSurname());
+        $contact->setSurname($formatageSurname);
 
-      $session = $request->getSession();
+         // Accés au repository
+          $em = $this->getDoctrine()->getManager();
+          $advertRepository = $em->getRepository('CR32QuestionnaireBundle:Danses');
 
-      if($uniqueContact==true){
-          $em->persist($contact);
-          $em->flush();
+        //Vérification si contact unique
+        $uniqueContact = $contactAction->uniqueContact($contact);
 
-          $session->getFlashBag()->add('add', 'Votre participation a bien été enregistrée');
-          return $this->redirectToRoute('cr32_questionnaire_thanks');
+        $session = $request->getSession();
+
+        if($uniqueContact==true){
+            $em->persist($contact);
+            $em->flush();
+
+            $session->getFlashBag()->add('add', 'Votre participation a bien été enregistrée');
+            return $this->redirectToRoute('cr32_questionnaire_thanks');
+        }
+        else {
+            $session->getFlashBag()->add('noUnique', 'Vous avez déjà participer !');
+
+            return $this->redirectToRoute('cr32_questionnaire_thanks');
+        }
       }
-      else {
-          $session->getFlashBag()->add('noUnique', 'Vous avez déjà participer !');
-
-          return $this->redirectToRoute('cr32_questionnaire_thanks');
-      }
-
-
+      return $this->render('CR32QuestionnaireBundle:Questionnaire:subscription.html.twig', array('form' => $form->createView()));
     }
+    else {
+      $session->getFlashBag()->add('noDanse', 'Vous devez envoyé(e) une danse pour accéder à la page abonnement');
 
-
-  	return $this->render('CR32QuestionnaireBundle:Questionnaire:subscription.html.twig', array('form' => $form->createView()));
+      $session->remove('danses');
+      
+      return $this->redirectToRoute('cr32_questionnaire_home');     
+    }
+    
   }
 
-  public function thanksAction()
+  public function thanksAction(Request $request)
   {
+    $request->getSession()->remove('danses');
   	return $this->render('CR32QuestionnaireBundle:Questionnaire:thanks.html.twig');
   }
 }
