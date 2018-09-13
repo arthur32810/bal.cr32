@@ -175,4 +175,52 @@ class Contact
     {
         return $this->subscription;
     }
+
+    /**
+     * Set secret.
+     *
+     * @param string $secret
+     *
+     * @return Contact
+     */
+    public function setSecret($secret)
+    {
+        $this->secret = $secret;
+
+        return $this;
+    }
+
+    /**
+     * Get secret.
+     *
+     * @return string
+     */
+    public function getSecret()
+    {
+        return $this->secret;
+    }
+
+    /**
+     * Set club.
+     *
+     * @param string $club
+     *
+     * @return Contact
+     */
+    public function setClub($club)
+    {
+        $this->club = $club;
+
+        return $this;
+    }
+
+    /**
+     * Get club.
+     *
+     * @return string
+     */
+    public function getClub()
+    {
+        return $this->club;
+    }
 }
