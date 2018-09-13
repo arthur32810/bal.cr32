@@ -33,10 +33,24 @@ class Contact
     /**
      * @var string
      *
-     * @ORM\Column(name="surname", type="string", length=255)*
+     * @ORM\Column(name="surname", type="string", length=255)
      * @Assert\Length(min=2, minMessage="votre prénom doit contenir au moins 2 caractéres")
      */
     private $surname;
+
+    /**
+    * @var string
+    * @ORM\Column(name="secret", type="string", length="255")
+    * @Assert\Length(min=2, minMessage="Votre mot secret doit contenir au moins 2 caractéres")
+    */
+    private $secret;
+
+    /**
+    * @var string
+    * @ORM\Column(name="club", type="string", length="255")
+    * @Assert\Length(min=2, minMessage="Votre nom de club doit contenir au moins 2 caractéres")
+    */
+    private $club;
 
     /**
      * @var string
@@ -52,6 +66,8 @@ class Contact
      * @ORM\Column(name="subscription", type="boolean")
      */
     private $subscription;
+
+
 
 
     /**
