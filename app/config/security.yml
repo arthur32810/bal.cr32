@@ -33,5 +33,5 @@ security:
       - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/register, role: ROLE_ADMIN }
       - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-      - { path: ^/admin/, role: ROLE_EDITEUR }
+      - { path: ^/admin, role: ROLE_EDITEUR }
     #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
