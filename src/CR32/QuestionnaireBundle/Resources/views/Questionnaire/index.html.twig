@@ -17,26 +17,22 @@
 
 		<div id="debutant">
 			<p> Débutant </p>
-			<p> {{form_widget(form.debutant1, {'attr': {'placeholder': '1er choix'}})}} </p>
-			<p> {{form_widget(form.debutant2, {'attr': {'placeholder': '2eme choix'}})}} </p>
+			<p> {{form_widget(form.debutant)}} </p>
 		</div>
 
 		<div id="novice">
 			<p> Novice </p>
-			<p> {{form_widget(form.novice1, {'attr': {'placeholder': '1er choix'}})}} </p>
-			<p> {{form_widget(form.novice2, {'attr': {'placeholder': '2eme choix'}})}} </p>
+			<p> {{form_widget(form.novice)}} </p>
 		</div>
 
 		<div id="intermediaire">
 			<p> Intermediaire </p>
-			<p> {{form_widget(form.intermediaire1, {'attr': {'placeholder': '1er choix'}})}} </p>
-			<p> {{form_widget(form.intermediaire2, {'attr': {'placeholder': '2eme choix'}})}} </p>
+			<p> {{form_widget(form.intermediaire)}} </p>
 		</div>
 
 		<div id="avance">
 			<p> Avancé </p>
-			<p> {{form_widget(form.avance1, {'attr': {'placeholder': '1er choix'}})}} </p>
-			<p> {{form_widget(form.avance2, {'attr': {'placeholder': '2eme choix'}})}} </p>
+			<p> {{form_widget(form.avance)}} </p>
 		</div>
 
 		{{form_row(form.envoyer, {'attr': {'class': 'float-right'}})}} <br>

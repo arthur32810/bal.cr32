@@ -16,14 +16,10 @@ class DansesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('debutant1', TextType::class, array('required'=> false))
-        ->add('debutant2', TextType::class, array('required'=> false))
-        ->add('novice1', TextType::class, array('required'=> false))
-        ->add('novice2', TextType::class, array('required'=> false))
-        ->add('intermediaire1', TextType::class, array('required'=> false))
-        ->add('intermediaire2', TextType::class, array('required'=> false))
-        ->add('avance1', TextType::class, array('required'=> false))
-        ->add('avance2', TextType::class, array('required'=> false))
+        ->add('debutant', TextType::class, array('required'=> false))
+        ->add('novice', TextType::class, array('required'=> false))
+        ->add('intermediaire', TextType::class, array('required'=> false))
+        ->add('avance', TextType::class, array('required'=> false))
         ->add('envoyer', SubmitType::class);
     }
 }
