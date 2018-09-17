@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -30,14 +30,6 @@ class ContactType extends AbstractType
         ->add('club',       TextType::class, array(
                                         'label' => 'Votre Club',
                                         'attr' => array('placeholder'=>'Votre club'),
-                                        'required'=>false))
-        ->add('subscription', CheckboxType::class, array(
-                                        'label' => "S'abonner à notre Country Rebell's Letter",
-                                        'attr' => array('placeholder' => 'Votre Nom'),
-                                        'required' => false))
-        ->add('email',      EmailType::class, array(
-                                        'label' => 'Email',
-                                        'attr' => array('placeholder' => 'Votre Email'),
                                         'required'=>false))
         ->add('envoyer',     SubmitType::class, array('attr' => array('class'=>'float-right')));
     }/**

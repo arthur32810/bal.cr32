@@ -53,24 +53,6 @@ class Contact
     private $club;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, unique=true)
-     * @Assert\Email(checkMX=true)
-     */
-    private $email;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="subscription", type="boolean")
-     */
-    private $subscription;
-
-
-
-
-    /**
      * Get id.
      *
      * @return int
@@ -129,50 +111,50 @@ class Contact
     }
 
     /**
-     * Set email.
+     * Set secret.
      *
-     * @param string $email
+     * @param string $secret
      *
      * @return Contact
      */
-    public function setEmail($email)
+    public function setSecret($secret)
     {
-        $this->email = $email;
+        $this->secret = $secret;
 
         return $this;
     }
 
     /**
-     * Get email.
+     * Get secret.
      *
      * @return string
      */
-    public function getEmail()
+    public function getSecret()
     {
-        return $this->email;
+        return $this->secret;
     }
 
     /**
-     * Set subscription.
+     * Set club.
      *
-     * @param bool $subscription
+     * @param string $club
      *
      * @return Contact
      */
-    public function setSubscription($subscription)
+    public function setClub($club)
     {
-        $this->subscription = $subscription;
+        $this->club = $club;
 
         return $this;
     }
 
     /**
-     * Get subscription.
+     * Get club.
      *
-     * @return bool
+     * @return string
      */
-    public function getSubscription()
+    public function getClub()
     {
-        return $this->subscription;
+        return $this->club;
     }
 }
