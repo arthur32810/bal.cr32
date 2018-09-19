@@ -53,6 +53,14 @@ class Contact
     private $club;
 
     /**
+    * @var string
+    *
+    * @ORM\Column(name="email", type="string", length=255, nullable=true)
+    * @Assert\Email(checkMX=true)
+    */
+    private $email;
+
+    /**
      * Get id.
      *
      * @return int

@@ -53,6 +53,14 @@ class Contact
     private $club;
 
     /**
+    * @var string
+    *
+    * @ORM\Column(name="email", type="string", length=255, nullable=true)
+    * @Assert\Email(checkMX=true)
+    */
+    private $email;
+
+    /**
      * Get id.
      *
      * @return int
@@ -156,5 +164,29 @@ class Contact
     public function getClub()
     {
         return $this->club;
+    }
+
+    /**
+     * Set email.
+     *
+     * @param string|null $email
+     *
+     * @return Contact
+     */
+    public function setEmail($email = null)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email.
+     *
+     * @return string|null
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 }

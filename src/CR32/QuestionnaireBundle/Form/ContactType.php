@@ -31,8 +31,14 @@ class ContactType extends AbstractType
                                         'label' => 'Votre Club',
                                         'attr' => array('placeholder'=>'Votre club'),
                                         'required'=>false))
+        ->add('email',      EmailType::class, array(
+                                        'label' => 'Email',
+                                        'attr' => array('placeholder' => 'Votre Email'),
+                                        'required' =>false))
         ->add('envoyer',     SubmitType::class, array('attr' => array('class'=>'float-right')));
-    }/**
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
