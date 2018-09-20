@@ -19,20 +19,20 @@ class ContactType extends AbstractType
     {
         $builder
         ->add('name',       TextType::class, array(
-                                        'label' => 'Nom',
+                                        'label' => 'Nom*',
                                         'attr' => array('placeholder' => 'Votre Nom')))
         ->add('surname',    TextType::class, array(
-                                        'label' => 'Prénom',
+                                        'label' => 'Prénom*',
                                         'attr' => array('placeholder' => 'Votre Prénom')))
         ->add('secret',     TextType::class, array(
-                                        'label'=> 'Mot secret',
+                                        'label'=> 'Mot secret*',
                                         'attr' => array('placeholder'=>'Votre mot secret')))
         ->add('club',       TextType::class, array(
                                         'label' => 'Votre Club',
                                         'attr' => array('placeholder'=>'Votre club'),
                                         'required'=>false))
         ->add('email',      EmailType::class, array(
-                                        'label' => 'Email',
+                                        'label' => 'Email*',
                                         'attr' => array('placeholder' => 'Votre Email'),
                                         'required' =>false))
         ->add('envoyer',     SubmitType::class, array('attr' => array('class'=>'float-right')));

@@ -13,6 +13,8 @@
 		{# Erreur du formulaire #}
 		{{ form_errors(form) }}
 
+		<p class="text-danger"> les champs marqués * sont obligatoires </p>
+
 		{{ form_row(form.name)}}
 		{{ form_row(form.surname)}}
 		{{ form_row(form.secret)}}
