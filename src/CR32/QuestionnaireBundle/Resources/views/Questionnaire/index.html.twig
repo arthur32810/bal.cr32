@@ -4,7 +4,10 @@
 
 {% block body %}
 	<h1 class="text-center"> Danses à la demande </h1>
-	<p class="text-center"> Veuillez donner le nom de deux danses pour chaque niveau : </p>	
+	<p class="text-center"> Bienvenue sur notre site de vote pour la playlist de notre bal, le 13 octobre 2018 </p>	
+	<p> Pour voter, c'est simple ! il suffit de donner le nom d'une à quatre danses du niveau de votre choix. (Une seule danse par niveau) <br>
+		La danse ayant le plus de vote, dans chaque niveau, sera ajoutée à la playlist de notre bal ! <br>
+		Nous vous souhaitons un bon vote !</p>
 
 	<div>
 		{% for message in app.session.flashbag.get('noDanse') %}
