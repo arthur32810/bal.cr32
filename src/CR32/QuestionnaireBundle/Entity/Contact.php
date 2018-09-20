@@ -47,7 +47,7 @@ class Contact
 
     /**
     * @var string
-    * @ORM\Column(name="club", type="string", length=255)
+    * @ORM\Column(name="club", type="string", length=255, nullable=true)
     * @Assert\Length(min=2, minMessage="Votre nom de club doit contenir au moins 2 caractéres")
     */
     private $club;

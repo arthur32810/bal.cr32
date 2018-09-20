@@ -18,7 +18,12 @@
 		{{ form_row(form.secret)}}
 		{{ form_row(form.club)}}
 
-		{{ form_row(form.email)}}
+		<input type="checkbox" name="subscription" id="subscription" onclick="subscribe()"/> <label for="subscription"> S'abonner à notre Country Rebell's Letter </label> <br>
+		<p> En vous abonnant à la Country Rebell's Letter, vous recevrez les dernières chorégraphies enseignées dans notre club mais également la liste des bals et évènement country du mois. </p>
+
+		<div id="email" style="display: none;">
+			{{ form_row(form.email)}}
+		</div>
 
 
 		<div class="row">
@@ -40,7 +45,16 @@
 		  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 		  crossorigin="anonymous"></script>
 
-		  <script>	
-		  	
+		 <script>	
+		  	function subscribe(){
+			  	if($('input[name=subscription]').is(':checked'))
+			  	{
+			  		$('#email').show();
+			  		$('#cr32_contact_email').attr('required', 'true');
+			  	}
+			  	else{ 
+			  		$('#email').hide();
+			  	}
+			 }
 		</script>
 {% endblock %}
