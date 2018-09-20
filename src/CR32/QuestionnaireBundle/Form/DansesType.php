@@ -20,6 +20,6 @@ class DansesType extends AbstractType
         ->add('novice', TextType::class, array('required'=> false))
         ->add('intermediaire', TextType::class, array('required'=> false))
         ->add('avance', TextType::class, array('required'=> false))
-        ->add('envoyer', SubmitType::class);
+        ->add('envoyer', SubmitType::class, array('label' => 'Voter'));
     }
 }

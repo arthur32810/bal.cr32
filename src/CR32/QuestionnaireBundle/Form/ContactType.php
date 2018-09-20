@@ -35,7 +35,9 @@ class ContactType extends AbstractType
                                         'label' => 'Email*',
                                         'attr' => array('placeholder' => 'Votre Email'),
                                         'required' =>false))
-        ->add('envoyer',     SubmitType::class, array('attr' => array('class'=>'float-right')));
+        ->add('envoyer',     SubmitType::class, array(
+                                        'label' => 'Participer',
+                                        'attr' => array('class'=>'float-right btn-secondary')));
     }
 
     /**

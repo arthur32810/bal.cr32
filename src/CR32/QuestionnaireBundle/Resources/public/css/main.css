@@ -5,3 +5,6 @@ body { background: url("../images/fond.jpg") fixed no-repeat;
 		}
 
 .main {background-color: rgba(255,255,255, 0.8); }
+
+.side {background-color: rgba(248,249,250, 0.8);
+		border-right: 2px dotted black }
