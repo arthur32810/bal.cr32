@@ -1,10 +1,12 @@
-# app/config/security.yml
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
 
 security:
   encoders:
     CR32\UserBundle\Entity\User: sha512
 
   role_hierarchy:
+    ROLE_EDITEUR:     ROLE_USER
     ROLE_ADMIN:       ROLE_EDITEUR
     ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
@@ -31,7 +33,6 @@ security:
 
   access_control:
       - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-      - { path: ^/register, role: ROLE_ADMIN }
+      - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/admin, role: ROLE_EDITEUR }
-    #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

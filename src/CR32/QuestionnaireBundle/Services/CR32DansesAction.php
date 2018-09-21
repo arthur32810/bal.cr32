@@ -28,7 +28,6 @@ Class CR32DansesAction
         }
 
         else {
-        	var_dump($datas);
         	foreach($datas as $data)
 	        {
 	          if($data != null)
@@ -38,19 +37,15 @@ Class CR32DansesAction
 
 	          	// remplace les à par a
 	          	$data = str_replace("à", "a", $data);
-	          	// mise en minuscule
-	          	$data = strtolower($data);
+
 	          	//suppression des caractéres spéciaux
 	          	$data = preg_replace("#[^a-zA-Z0-9éè ]#", "", $data);
 
 
 
-	          	// récupération de la clé""
+	          	// récupération de la clé
 	          	$key = array_search($data, $datas);
 	          	$key = preg_replace("#[^a-zA-Z]#", "", $key);
-
-	          	//On met le nom de la danses dans l'entité
-	          	$danses->setTitre($data);
 
 	          	switch($key)
 	          	{
@@ -70,6 +65,12 @@ Class CR32DansesAction
 
 	          	//insertion du niveau dans l'entité
 	          	$danses->setNiveau($niveau);
+
+	          	// mise en minuscule
+	          	$data = strtolower($data);
+
+	          	//On met le nom de la danses dans l'entité
+	          	$danses->setTitre($data);
 
 	          	$em->persist($danses);
 				$em->flush();
