@@ -39,6 +39,13 @@ class Contact
     private $surname;
 
     /**
+    * @var boolean
+    *
+    * @ORM\Column(name="tombola", type="boolean")
+    */
+    private $tombola;
+
+    /**
     * @var string
     * @ORM\Column(name="secret", type="string", length=255)
     * @Assert\Length(min=2, minMessage="Votre mot secret doit contenir au moins 2 caractéres")
@@ -188,5 +195,29 @@ class Contact
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set tombola.
+     *
+     * @param bool $tombola
+     *
+     * @return Contact
+     */
+    public function setTombola($tombola)
+    {
+        $this->tombola = $tombola;
+
+        return $this;
+    }
+
+    /**
+     * Get tombola.
+     *
+     * @return bool
+     */
+    public function getTombola()
+    {
+        return $this->tombola;
     }
 }

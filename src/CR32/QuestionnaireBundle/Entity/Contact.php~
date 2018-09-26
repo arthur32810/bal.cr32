@@ -39,6 +39,13 @@ class Contact
     private $surname;
 
     /**
+    * @var boolean
+    *
+    * @ORM\Column(name="tombola", type="boolean")
+    */
+    private $tombola;
+
+    /**
     * @var string
     * @ORM\Column(name="secret", type="string", length=255)
     * @Assert\Length(min=2, minMessage="Votre mot secret doit contenir au moins 2 caractéres")
@@ -47,7 +54,7 @@ class Contact
 
     /**
     * @var string
-    * @ORM\Column(name="club", type="string", length=255)
+    * @ORM\Column(name="club", type="string", length=255, nullable=true)
     * @Assert\Length(min=2, minMessage="Votre nom de club doit contenir au moins 2 caractéres")
     */
     private $club;
@@ -164,5 +171,29 @@ class Contact
     public function getClub()
     {
         return $this->club;
+    }
+
+    /**
+     * Set email.
+     *
+     * @param string|null $email
+     *
+     * @return Contact
+     */
+    public function setEmail($email = null)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email.
+     *
+     * @return string|null
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 }

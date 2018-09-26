@@ -5,7 +5,8 @@
 {% block body %}
 	<h1 class="text-center"> Danses à la demande </h1>
 	<p class="text-left"> Merci pour votre vote ! <br>
-	Votre vote vous permet de participer à la tombola, merci de renseignez les champs suivant, si vous souhaitez participer. </p>	
+		Afin d'authentifier votre vote, merci de remplir les champs suivant </p>
+	<!-- -->
 
 	<div>
 		{{ form_start(form)}}
@@ -17,15 +18,28 @@
 
 		{{ form_row(form.name)}}
 		{{ form_row(form.surname)}}
-
-		{{ form_label(form.secret)}}
-		<p> Il vous sera demandé lors du tirage de la tombola</p>
-		{{ form_widget(form.secret)}}
-		{{ form_errors (form.secret)}}
-
 		{{ form_row(form.club)}}
 
-		<input type="checkbox" name="subscription" id="subscription" onclick="subscribe()"/> <label for="subscription"> S'abonner à notre Country Rebell's Letter </label> <br>
+		<p> Votre vote vous permet de participer à la tombola, si oui remplissez les champs ci-dessous. </p>
+		<div class="row">
+			<div class="col-1">
+				<input name="tombola" type="radio" value="1" onclick="radio()"/><label for="1"> Oui</label>
+			</div>
+			<div class="col">
+	    		<input name="tombola" type="radio" value="0"  onclick="radio()" checked/><label for="0"> Non</label> 
+	    	</div>
+	    </div>
+
+
+	    <div id="secret" style="display: none">
+			{{ form_label(form.secret)}}
+			<p> Il vous sera demandé lors du tirage de la tombola</p>
+			{{ form_widget(form.secret)}}
+			{{ form_errors (form.secret)}}
+		</div>
+
+
+		<br><input type="checkbox" name="subscription" id="subscription" onclick="subscribe()"/> <label for="subscription"> S'abonner à notre Country Rebell's Letter </label> <br>
 		<p> En vous abonnant à la Country Rebell's Letter, vous recevrez les dernières chorégraphies enseignées dans notre club mais également la liste des bals et évènement country du mois. </p>
 
 		<div id="email" style="display: none;">
@@ -33,14 +47,9 @@
 		</div>
 
 
-		<div class="row">
-			<div class="col">
-				<a class="btn btn-danger" href="{{path('cr32_questionnaire_thanks')}}" role="button">Non merci</a>
-			</div>
-			<div class="col">
-				{{ form_row(form.envoyer)}}
-			</div>
-		</div>
+		
+		{{ form_row(form.envoyer)}}
+			<button id="debug">Debug</button>
 
 		{{ form_rest(form)}}
 
@@ -61,7 +70,25 @@
 			  	}
 			  	else{ 
 			  		$('#email').hide();
+			  		$('#cr32_contact_email').attr('required', 'false');
 			  	}
 			 }
+
+			 function radio(){
+        		var tombola = $('input[name=tombola]:checked').val();
+        		if(tombola ==1)
+        		{
+        			$('#secret').show();
+        			$('#cr32_contact_secret').attr('required', 'true');
+        		}
+        		else if(tombola == 0)
+        		{
+        			$('#secret').hide();
+        			$('#cr32_contact_secret').attr('required', 'false');
+        		}
+
+
+   			}
+
 		</script>
 {% endblock %}

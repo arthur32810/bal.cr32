@@ -24,13 +24,14 @@ class ContactType extends AbstractType
         ->add('surname',    TextType::class, array(
                                         'label' => 'Prénom*',
                                         'attr' => array('placeholder' => 'Votre Prénom')))
-        ->add('secret',     TextType::class, array(
-                                        'label'=> 'Mot secret*',
-                                        'attr' => array('placeholder'=>'Votre mot secret')))
         ->add('club',       TextType::class, array(
                                         'label' => 'Votre Club',
                                         'attr' => array('placeholder'=>'Votre club'),
                                         'required'=>false))
+        ->add('secret',     TextType::class, array(
+                                        'label'=> 'Mot secret*',
+                                        'attr' => array('placeholder'=>'Votre mot secret'),
+                                        'required' => false))
         ->add('email',      EmailType::class, array(
                                         'label' => 'Email*',
                                         'attr' => array('placeholder' => 'Votre Email'),
