@@ -6,28 +6,27 @@ use CR32\QuestionnaireBundle\Entity\Danses;
 
 Class CR32DansesAction
 {
-	public function dansesAction($datas, $session, $em){
-
+	public function zeroDanse($danses)
+	{
+		//initialisation de la variable null à vrai
 		$null=true;
 
-        foreach($datas as $data)
-        {
-          if($data == null && $null!=false)
+		//recherche de données
+        foreach($danses as $danse)
+        {	
+        	//si une donnée est nulle
+          if($danse == null && $null!=false)
           {
             $null=true;
           }
           else{ $null=false; }
         }
 
-        if($null==true)
-        {
-        	 $session->getFlashBag()->add('noDanse', 'Vous devez donnez au moins une danse');
+        return $null;
+	}
 
-            // Envoie vers la page de formulaire si non soumis
-            return $null;
-        }
+	public function dansesAction($datas, $session, $em){
 
-        else {
         	foreach($datas as $data)
 	        {
 	          if($data != null)
@@ -81,4 +80,3 @@ Class CR32DansesAction
 
 
 	}
-}

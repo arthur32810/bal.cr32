@@ -5,11 +5,11 @@
 {% block body %}
 	<h1 class="text-center"> Danses à la demande </h1>
 
-	{% for message in app.session.flashbag.get('noUnique') %}
+	{% for message in app.session.flashbag.get('alert') %}
 	    <p class="alert alert-danger">{{ message }}</p>
 	{% endfor %}	
 
-	{% for message in app.session.flashbag.get('add') %}
+	{% for message in app.session.flashbag.get('success') %}
 	    <p class="alert alert-success">{{ message }}</p>
 	{% endfor %}
 

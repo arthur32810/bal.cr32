@@ -49,8 +49,6 @@
 
 		
 		{{ form_row(form.envoyer)}}
-			<button id="debug">Debug</button>
-
 		{{ form_rest(form)}}
 
 	</div>
@@ -69,8 +67,9 @@
 			  		$('#cr32_contact_email').attr('required', 'true');
 			  	}
 			  	else{ 
+			  		$('#cr32_contact_email').removeAttr('required');
 			  		$('#email').hide();
-			  		$('#cr32_contact_email').attr('required', 'false');
+			  		
 			  	}
 			 }
 
@@ -83,11 +82,10 @@
         		}
         		else if(tombola == 0)
         		{
+        			$('#cr32_contact_secret').removeAttr('required');
         			$('#secret').hide();
-        			$('#cr32_contact_secret').attr('required', 'false');
+        			
         		}
-
-
    			}
 
 		</script>

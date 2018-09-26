@@ -24,30 +24,30 @@ class QuestionnaireController extends Controller
     {
         
         // Récupération des champs dans data.
-        $datas = $form->getData();
-
-        // Accés au repository
-        $em = $this->getDoctrine()->getManager();
-        $advertRepository = $em->getRepository('CR32QuestionnaireBundle:Danses');
+        $danses = $form->getData();        
 
         //Déclaration de la session
         $session = $request->getSession();
 
-
         //récupération du service
         $formdanses = $this->container->get('cr32_questionnaire.dansesAction');
-        $zerodanses = $formdanses->dansesAction($datas, $session, $em);
+        $zeroDanse  = $formdanses->zeroDanse($danses);
+
+        var_dump($zeroDanse);
 
         //test si au moins une danse à été soumise
-        if($zerodanses==false)
+        if($zeroDanse==false)
         {
           //une danse à au moins été votée
-          $session->set('danses', true);
+          $session->set('danses', $danses);
           return $this->redirectToRoute('cr32_questionnaire_subscription');
-        }   
-
-        //zéro danse votée
-        $session->set('danses', false);     
+        }  
+        else 
+        {
+           $session->getFlashBag()->add('noDanse', 'Vous devez donnez au moins une danse pour que votre vote soit pris en compte');
+            //zéro danse votée
+            $session->set('danses', false);  
+        } 
     }
 
     return $this->render('CR32QuestionnaireBundle:Questionnaire:index.html.twig', array('form' => $form->createView()));
@@ -56,9 +56,9 @@ class QuestionnaireController extends Controller
   public function subscriptionAction(Request $request)
   {
     $session = $request->getSession();
-    $sessionDanse = $session->get('danses');
+    $danses = $session->get('danses');
 
-    if($sessionDanse === true)
+    if(!empty($danses))
     {
       //Déclaration de l'entité
       $contact = new Contact;
@@ -68,12 +68,14 @@ class QuestionnaireController extends Controller
 
       if($request->isMethod('POST') && $form->handleRequest($request)->isValid())
       {
-        // Récupération du service
+        // Récupération des services
         $contactAction = $this->container->get('cr32_questionnaire.contactAction');
-        //Vérification si email unique
-        $uniqueEmail = $contactAction->uniqueEmail($contact);
+        $danseAction   = $this->container->get('cr32_questionnaire.dansesAction');
 
-        if($uniqueEmail === true)
+        //Vérification si le contact est unique
+        $uniqueContact = $contactAction->uniqueContact($contact);
+
+        if($uniqueContact === true)
         {
           //Formatage du texte
           $formatageName = $contactAction->formatage($contact->getName());
@@ -86,38 +88,43 @@ class QuestionnaireController extends Controller
             $em = $this->getDoctrine()->getManager();
             $advertRepository = $em->getRepository('CR32QuestionnaireBundle:Danses');
 
-          //Vérification si contact unique
-          $uniqueContact = $contactAction->uniqueContact($contact);
+          //Vérification si email unique pour la country Rebell's Letter
+          $uniqueEmail = $contactAction->uniqueEmail($contact);
 
-
-
+          if($uniqueEmail == true)
+          {
+            $session->getFlashBag()->add('success', 'Vous êtes bien inscrit à notre Country Rebell\'s Letter');
+          }
+          else
+          {
+            $session->getFlashBag()->add('alert', 'Votre adresse mail est déjà enregistrée dans la liste de diffusion de la Country Rebell\'s Letter');
+          }
+              
           $session = $request->getSession();
 
-          if($uniqueContact==true){
-              $em->persist($contact);
-              $em->flush();
+          // Accés au repository
+          $em = $this->getDoctrine()->getManager();
+          $advertRepository = $em->getRepository('CR32QuestionnaireBundle:Danses');
 
-              $session->getFlashBag()->add('add', 'Votre participation a bien été enregistrée');
-              return $this->redirectToRoute('cr32_questionnaire_thanks');
+          //Persist danses
+          $danseAction->dansesAction($danses, $session, $em);
+          //Perist contact
+          $em->persist($contact);
+          $em->flush();
+
+          $session->getFlashBag()->add('success', 'Votre participation a bien été enregistrée');
+          return $this->redirectToRoute('cr32_questionnaire_thanks');
           }
           else {
-              $session->getFlashBag()->add('noUnique', 'Vous avez déjà participer ! Votre nom et prénom ont déjà été enregistrés');
+              $session->getFlashBag()->add('alert', 'Vous avez déjà participer ! Votre vote n\'as pas été pris en compte');
 
               return $this->redirectToRoute('cr32_questionnaire_thanks');
           }
         }
-        else
-        {
-          $session->getFlashBag()->add('noUnique', 'L\'adresse email a déjà été soumise. Vous ne pouvez pas participer deux fois !');
-
-          return $this->redirectToRoute('cr32_questionnaire_thanks');
-        }
-
-      }
       return $this->render('CR32QuestionnaireBundle:Questionnaire:subscription.html.twig', array('form' => $form->createView()));
     }
     else {
-      $session->getFlashBag()->add('noDanse', 'Vous devez envoyé(e) une danse pour accéder à la page abonnement');
+      $session->getFlashBag()->add('noDanse', 'Vous devez envoyé(e) une danse pour que votre vote soit pris en compte');
 
       $session->remove('danses');
       
