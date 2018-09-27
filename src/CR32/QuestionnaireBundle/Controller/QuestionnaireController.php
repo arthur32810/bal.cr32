@@ -88,26 +88,39 @@ class QuestionnaireController extends Controller
             $em = $this->getDoctrine()->getManager();
             $advertRepository = $em->getRepository('CR32QuestionnaireBundle:Danses');
 
-          //Vérification si email unique pour la country Rebell's Letter
-          $uniqueEmail = $contactAction->uniqueEmail($contact);
+          //Si email saisi
+            if(!empty($contact->getEmail()))
+            {
+              //Vérification si email unique pour la country Rebell's Letter
+              $uniqueEmail = $contactAction->uniqueEmail($contact);
 
-          if($uniqueEmail == true)
-          {
-            $session->getFlashBag()->add('success', 'Vous êtes bien inscrit à notre Country Rebell\'s Letter');
-          }
-          else
-          {
-            $session->getFlashBag()->add('alert', 'Votre adresse mail est déjà enregistrée dans la liste de diffusion de la Country Rebell\'s Letter');
-          }
-              
-          $session = $request->getSession();
+              if($uniqueEmail == true)
+              {
+                $session->getFlashBag()->add('success', 'Vous êtes bien inscrit à notre Country Rebell\'s Letter');
+              }
+              else
+              {
+                $session->getFlashBag()->add('alert', 'Votre adresse mail est déjà enregistrée dans la liste de diffusion de la Country Rebell\'s Letter');
+              }
+            }
 
           // Accés au repository
           $em = $this->getDoctrine()->getManager();
           $advertRepository = $em->getRepository('CR32QuestionnaireBundle:Danses');
 
+          //Définition de la tombola
+          if(!empty($contact->getSecret()))
+          {
+            $contact->setTombola('1');
+          }
+          else
+          {
+            $contact->setTombola('0');
+          }
+
           //Persist danses
           $danseAction->dansesAction($danses, $session, $em);
+
           //Perist contact
           $em->persist($contact);
           $em->flush();
