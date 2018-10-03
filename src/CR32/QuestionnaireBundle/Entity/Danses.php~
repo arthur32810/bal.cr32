@@ -99,28 +99,4 @@ class Danses
     {
         return $this->niveau;
     }
-
-    /**
-     * Set contact.
-     *
-     * @param \CR32\QuestionnaireBundle\Entity\Contact $contact
-     *
-     * @return Danses
-     */
-    public function setContact(\CR32\QuestionnaireBundle\Entity\Contact $contact)
-    {
-        $this->contact = $contact;
-
-        return $this;
-    }
-
-    /**
-     * Get contact.
-     *
-     * @return \CR32\QuestionnaireBundle\Entity\Contact
-     */
-    public function getContact()
-    {
-        return $this->contact;
-    }
 }

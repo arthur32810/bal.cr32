@@ -23,20 +23,17 @@ cr32_administration_danses:
         niveau: all
 
 cr32_administration_contacts:
-    path:   /admin/contacts
-    defaults: { _controller: CR32QuestionnaireBundle:Administration:contacts }
-
-# supression d'une danse
-cr32_administration_danse_delete:
-    path:   /admin/danse/delete/{id}
-    defaults: { _controller: CR32QuestionnaireBundle:Administration:deleteDanse }
+    path:   /admin/contacts/{id}
+    defaults: 
+        _controller: CR32QuestionnaireBundle:Administration:contacts
+        id: null
 
 # modification d'une danse
 cr32_administration_danse_edit:
-    path:   /admin/danse/edit/{id}
+    path:   /admin/danse/edit/{id}{niveau}
     defaults: { _controller: CR32QuestionnaireBundle:Administration:editDanse }
 
-# suppression d'un contact
-cr32_administration_contact_delete:
-    path:   /admin/contact/delete/{id}
-    defaults: { _controller: CR32QuestionnaireBundle:Administration:deleteContact }
+# supression d'une danse
+cr32_administration_danse_delete:
+    path:   /admin/danse/delete/{id}{niveau}
+    defaults: { _controller: CR32QuestionnaireBundle:Administration:deleteDanse }

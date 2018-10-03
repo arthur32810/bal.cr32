@@ -118,11 +118,14 @@ class QuestionnaireController extends Controller
             $contact->setTombola('0');
           }
 
-          //Persist danses
-          $danseAction->dansesAction($danses, $session, $em);
+          $danse = new Danses();
 
-          //Perist contact
-          $em->persist($contact);
+          $danse->setContact($contact);
+
+          //Persist danses
+          $danseAction->formateDansesAction($danse, $danses, $session, $em);
+
+          $em->persist($danse);
           $em->flush();
 
           $session->getFlashBag()->add('success', 'Votre participation a bien été enregistrée');

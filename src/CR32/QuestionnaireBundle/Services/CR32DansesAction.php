@@ -25,14 +25,12 @@ Class CR32DansesAction
         return $null;
 	}
 
-	public function dansesAction($datas, $session, $em){
+	public function formateDansesAction($danses, $datas, $session, $em){
 
         	foreach($datas as $data)
 	        {
 	          if($data != null)
 	          {
-
-	          	$danses = new Danses();
 
 	          	// remplace les à par a
 	          	$data = str_replace("à", "a", $data);
@@ -70,10 +68,6 @@ Class CR32DansesAction
 
 	          	//On met le nom de la danses dans l'entité
 	          	$danses->setTitre($data);
-
-	          	$em->persist($danses);
-				$em->flush();
-
 	          }
 	        }
         }

@@ -40,7 +40,7 @@ class AdministrationController extends Controller
 		return $this->render('CR32QuestionnaireBundle:Administration:danses.html.twig', array('listDanses' => $listDanses));
 	}
 
-	public function editDanseAction(Danses $danse, Request $request)
+	public function editDanseAction(Danses $danse, Request $request, $niveau)
 	{
 		$form = $this->get('form.factory')->create(DansesEditType::class, $danse);
 
@@ -50,13 +50,14 @@ class AdministrationController extends Controller
       		$em->flush();
 
       		$request->getSession()->getFlashBag()->add('success', 'Danse bien modifiée.');
-      		return $this->redirectToRoute('cr32_administration_danses');
+
+      		return $this->redirectToRoute('cr32_administration_danses', array('niveau'=>$niveau));
 		}
 
 		return $this->render('CR32QuestionnaireBundle:Administration:edit.html.twig', array('form'=>$form->createView()));
 	}
 
-	public function deleteDanseAction($id, Request $request)
+	public function deleteDanseAction($id, $niveau, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
 
@@ -67,38 +68,20 @@ class AdministrationController extends Controller
 			throw new NotFoundHttpException("La danse d'id ".$id." n'existe pas.");
 		}
 
+		$em->remove($danse->getContact());
 		$em->remove($danse);
 		$em->flush();
 
 		$request->getSession()->getFlashBag()->add('success', 'Danse bien supprimée.');
-		return $this->redirectToRoute('cr32_administration_danses');
+		return $this->redirectToRoute('cr32_administration_danses', array('niveau'=>$niveau));
 	}
 
-	public function contactsAction()
+	public function contactsAction($id)
 	{
 		$em = $this->getDoctrine()->getManager();
 
 		$listContacts = $em->getRepository('CR32QuestionnaireBundle:Contact')->findAll();
 
-		return $this->render('CR32QuestionnaireBundle:Administration:contacts.html.twig', array('listContacts'=> $listContacts));
-	}
-
-	public function deleteContactAction($id, Request $request)
-	{
-		$em = $this->getDoctrine()->getManager();
-
-		$contact = $em->getRepository('CR32QuestionnaireBundle:Contact')->find($id);
-
-		if(null === $contact)
-		{
-			throw new NotFoundHttpException("Le contact d'id ".$id." n'existe pas.");
-		}
-
-		$em->remove($contact);
-		$em->flush();
-
-		$request->getSession()->getFlashBag()->add('success', 'Contact bien suprimé.');
-
-		return $this->redirectToRoute('cr32_administration_contacts');
+		return $this->render('CR32QuestionnaireBundle:Administration:contacts.html.twig', array('listContacts'=> $listContacts, 'id'=>$id));
 	}
 }
