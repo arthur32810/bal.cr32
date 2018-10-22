@@ -14,6 +14,11 @@ use CR32\QuestionnaireBundle\Form\ContactType;
 
 class QuestionnaireController extends Controller
 {
+  public function clotureVoteAction()
+  {
+    return $this->render('CR32QuestionnaireBundle:Questionnaire:clotureVote.html.twig');
+  }
+  
   public function indexAction(Request $request)
   {
     // Création du formulaire

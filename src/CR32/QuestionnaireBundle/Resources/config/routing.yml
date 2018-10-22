@@ -1,15 +1,19 @@
 #Partie QUestionnaire
-cr32_questionnaire_home:
-    path:     /
-    defaults: { _controller: CR32QuestionnaireBundle:Questionnaire:index }
 
-cr32_questionnaire_subscription:
-    path:     /abonnement
-    defaults: { _controller: CR32QuestionnaireBundle:Questionnaire:subscription }
+cr32_questionnaire_clotureVote:
+    path:       /
+    defaults:   { _controller: CR32QuestionnaireBundle:Questionnaire:clotureVote}
+#cr32_questionnaire_home:
+#    path:     /
+#    defaults: { _controller: CR32QuestionnaireBundle:Questionnaire:index }
 
-cr32_questionnaire_thanks:
-    path:     /merci
-    defaults: { _controller: CR32QuestionnaireBundle:Questionnaire:thanks }
+#cr32_questionnaire_subscription:
+#    path:     /abonnement
+#    defaults: { _controller: CR32QuestionnaireBundle:Questionnaire:subscription }
+
+#cr32_questionnaire_thanks:
+#    path:     /merci
+#    defaults: { _controller: CR32QuestionnaireBundle:Questionnaire:thanks }
 
 #Partie Administration
 cr32_administration_admin:
